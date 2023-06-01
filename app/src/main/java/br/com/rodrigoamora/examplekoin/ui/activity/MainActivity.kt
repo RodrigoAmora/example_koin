@@ -23,8 +23,6 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var recyclerView: RecyclerView
 
-    private lateinit var contacts: List<Contact>
-
     private val contactViewModel: ContactViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
