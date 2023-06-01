@@ -11,12 +11,14 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import br.com.rodrigoamora.examplekoin.R
+import br.com.rodrigoamora.examplekoin.database.dao.ContactDao
 import br.com.rodrigoamora.examplekoin.model.Contact
 import br.com.rodrigoamora.examplekoin.ui.recyclerview.adapter.ContactAdapter
 import br.com.rodrigoamora.examplekoin.ui.recyclerview.listener.OnItemRecyclerViewClickListener
 import br.com.rodrigoamora.examplekoin.ui.viewmodel.ContactViewModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.android.ext.android.inject
 
 class MainActivity : AppCompatActivity() {
 
@@ -28,6 +30,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
         initViews()
         configureRecyclerView()
         getContacts()
@@ -46,8 +49,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initViews() {
-        setContentView(R.layout.activity_main)
-
         val fabAddContact: FloatingActionButton = findViewById(R.id.fab_add_contact)
         fabAddContact.setOnClickListener {
             startActivity(Intent(this, AddContactActivity::class.java))
@@ -58,10 +59,10 @@ class MainActivity : AppCompatActivity() {
 
     private fun configureRecyclerView() {
         val linearLayout = LinearLayoutManager(this,
-            LinearLayoutManager.VERTICAL,
-            false)
+                                                LinearLayoutManager.VERTICAL,
+                                                false)
         val dividerItemDecoration = DividerItemDecoration(this,
-            DividerItemDecoration.VERTICAL)
+                                                            DividerItemDecoration.VERTICAL)
 
         recyclerView.addItemDecoration(dividerItemDecoration)
         recyclerView.setHasFixedSize(true)
@@ -71,7 +72,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun populateRecyclerView(contacts: List<Contact>) {
-        if (!contacts.isNullOrEmpty()) {
+        if (contacts.isNotEmpty()) {
             val adapter = ContactAdapter(this, contacts)
             adapter.setListener(object : OnItemRecyclerViewClickListener<Contact> {
                 override fun deleteItem(contact: Contact) {
@@ -84,6 +85,8 @@ class MainActivity : AppCompatActivity() {
 
                 }
             })
+
+            recyclerView.adapter = adapter
         }
     }
 
