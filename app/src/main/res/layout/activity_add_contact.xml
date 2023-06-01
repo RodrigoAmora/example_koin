@@ -4,6 +4,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <include
+        layout="@layout/app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
     <EditText
         android:id="@+id/tv_name_contact"
         android:hint="@string/hint_name_contact"
@@ -11,7 +16,7 @@
         android:textColor="@color/black"
         android:textSize="12pt"
         android:textStyle="bold"
-        android:layout_marginTop="@dimen/margin_top"
+        android:layout_marginTop="?attr/actionBarSize"
         android:layout_marginStart="@dimen/margin_start"
         android:layout_marginEnd="@dimen/margin_end"
         app:layout_constraintTop_toBottomOf="parent"
