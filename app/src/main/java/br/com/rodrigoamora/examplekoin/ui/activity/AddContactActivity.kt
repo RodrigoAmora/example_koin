@@ -21,7 +21,7 @@ class AddContactActivity : AppCompatActivity() {
     lateinit var inputEmail: EditText
     lateinit var inputName: EditText
 
-    private val contactViewModel: ContactViewModel by inject()//viewModel()
+    private val contactViewModel: ContactViewModel by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,9 +59,9 @@ class AddContactActivity : AppCompatActivity() {
         inputEmail = findViewById(R.id.tv_email_contact)
         inputEmail.setOnEditorActionListener(TextView.OnEditorActionListener { v, actionId, event ->
             var handled = false
-            if (actionId == EditorInfo.IME_ACTION_NEXT) {
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
                 handled = true
-                inputName.requestFocus()
+                saveContact()
             }
             handled
         })
@@ -69,9 +69,9 @@ class AddContactActivity : AppCompatActivity() {
         inputName = findViewById(R.id.tv_name_contact)
         inputName.setOnEditorActionListener(TextView.OnEditorActionListener { v, actionId, event ->
             var handled = false
-            if (actionId == EditorInfo.IME_ACTION_DONE) {
+            if (actionId == EditorInfo.IME_ACTION_NEXT) {
                 handled = true
-                saveContact()
+                inputCellphone.requestFocus()
             }
             handled
         })
