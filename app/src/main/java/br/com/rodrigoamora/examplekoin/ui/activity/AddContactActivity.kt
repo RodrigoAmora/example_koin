@@ -3,14 +3,14 @@ package br.com.rodrigoamora.examplekoin.ui.activity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import br.com.rodrigoamora.examplekoin.R
+import br.com.rodrigoamora.examplekoin.extension.checkText
 import br.com.rodrigoamora.examplekoin.model.Contact
 import br.com.rodrigoamora.examplekoin.ui.viewmodel.ContactViewModel
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import org.koin.android.ext.android.inject
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class AddContactActivity : AppCompatActivity() {
 
@@ -38,17 +38,33 @@ class AddContactActivity : AppCompatActivity() {
     }
 
     private fun saveContact() {
-        val cellphone = inputCellphone.text.toString()
-        val email = inputEmail.text.toString()
-        val name = inputName.text.toString()
+        val inputs = listOf<EditText>(inputCellphone, inputEmail, inputName)
+        if (verifyIfEditTextAreEmpty(inputs)) {
+            val cellphone = inputCellphone.text.toString()
+            val email = inputEmail.text.toString()
+            val name = inputName.text.toString()
 
-        val contact: Contact = Contact(0, name, cellphone, email)
+            val contact: Contact = Contact(0, name, cellphone, email)
 
-        contactViewModel.saveContact(contact).observe(this,
-            Observer {
-                finish()
+            contactViewModel.saveContact(contact).observe(this,
+                Observer {
+                    Toast.makeText(this,
+                                    getString(R.string.success_contact_save),
+                                    Toast.LENGTH_LONG).show()
+
+                    finish()
+                }
+            )
+        }
+    }
+
+    private fun verifyIfEditTextAreEmpty(inputs: List<EditText>): Boolean {
+        for (input in inputs) {
+            if (!input.checkText(getString(R.string.error_field_required))) {
+                return false
             }
-        )
+        }
+        return true
     }
 
 }
