@@ -9,7 +9,11 @@ import br.com.rodrigoamora.examplekoin.repository.Resource
 class ContactViewModel(
     private val contactRepository: ContactRepository
 ): ViewModel() {
-    
+
+    fun delete(contact: Contact): LiveData<Resource<Void?>> {
+        return contactRepository.deleteContact(contact)
+    }
+
     fun getContacts(): LiveData<Resource<List<Contact>?>> {
         return contactRepository.getContacts()
     }

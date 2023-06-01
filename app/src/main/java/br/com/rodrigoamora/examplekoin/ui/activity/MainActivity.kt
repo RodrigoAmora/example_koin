@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DefaultItemAnimator
@@ -76,7 +77,13 @@ class MainActivity : AppCompatActivity() {
             val adapter = ContactAdapter(this, contacts)
             adapter.setListener(object : OnItemRecyclerViewClickListener<Contact> {
                 override fun deleteItem(contact: Contact) {
-
+                    contactViewModel.delete(contact).observe(this@MainActivity,
+                        Observer {
+                            Toast.makeText(this@MainActivity,
+                                getString(R.string.success_contact_delete),
+                                Toast.LENGTH_LONG).show()
+                        }
+                    )
                 }
 
                 override fun getItem(contact: Contact) {

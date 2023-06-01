@@ -9,5 +9,6 @@
 
     <string name="error_field_required">This field is required!</string>
 
+    <string name="success_contact_delete">Contact deleted successfully!</string>
     <string name="success_contact_save">Contact saved successfully!</string>
 </resources>

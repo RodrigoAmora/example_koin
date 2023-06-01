@@ -17,6 +17,13 @@ class ContactRepositoryImpl(
 
     private val mediator = MediatorLiveData<Resource<List<Contact>?>>()
 
+    override fun deleteContact(contact: Contact): LiveData<Resource<Void?>> {
+        deleteInDatabase(contact)
+        val liveData = MutableLiveData<Resource<Void?>>()
+        liveData.value = Resource(null)
+        return liveData
+    }
+
     override fun getContacts(): LiveData<Resource<List<Contact>?>> {
         mediator.addSource(contactDao.findAll()) { contactsFound ->
             mediator.value = Resource(contactsFound)
@@ -30,6 +37,14 @@ class ContactRepositoryImpl(
         val liveData = MutableLiveData<Resource<Void?>>()
         liveData.value = Resource(null)
         return liveData
+    }
+
+    private fun deleteInDatabase(contact: Contact) {
+        BaseAsyncTask(
+            whenExecutes = {
+                contactDao.remove(contact)
+            }, whenEnds = {}
+        ).execute()
     }
 
     private fun saveInDatabase(contact: Contact) {
