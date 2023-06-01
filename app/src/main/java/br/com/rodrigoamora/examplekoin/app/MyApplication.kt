@@ -11,6 +11,15 @@ class MyApplication: Application() {
 
     override fun onCreate() {
         super.onCreate()
+        instantiateKoin()
+    }
+
+    override fun onTerminate() {
+        super.onTerminate()
+        terminateKoin()
+    }
+
+    private fun instantiateKoin() {
         startKoin{
             androidLogger()
             androidContext(this@MyApplication)
@@ -18,8 +27,7 @@ class MyApplication: Application() {
         }
     }
 
-    override fun onTerminate() {
-        super.onTerminate()
+    private fun terminateKoin() {
         stopKoin()
     }
 
