@@ -5,4 +5,5 @@ import br.com.rodrigoamora.examplekoin.model.Contact
 
 interface ContactRepository {
     fun getContacts(): LiveData<Resource<List<Contact>?>>
+    fun saveContact(contact: Contact): LiveData<Resource<Void?>>
 }
