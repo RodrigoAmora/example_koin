@@ -8,7 +8,6 @@ import br.com.rodrigoamora.examplekoin.database.dao.ContactDao
 import br.com.rodrigoamora.examplekoin.model.Contact
 import br.com.rodrigoamora.examplekoin.repository.ContactRepository
 import br.com.rodrigoamora.examplekoin.repository.Resource
-import org.koin.android.ext.android.inject
 
 
 class ContactRepositoryImpl(
