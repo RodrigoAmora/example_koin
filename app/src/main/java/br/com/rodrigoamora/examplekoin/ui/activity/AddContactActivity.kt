@@ -1,10 +1,13 @@
 package br.com.rodrigoamora.examplekoin.ui.activity
 
 import android.os.Bundle
+import android.view.inputmethod.EditorInfo
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
 import br.com.rodrigoamora.examplekoin.R
 import br.com.rodrigoamora.examplekoin.extension.checkText
@@ -24,6 +27,17 @@ class AddContactActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_contact)
         initViews()
+        createToolbar()
+    }
+
+    override fun onBackPressed() {
+        finish()
+        super.onBackPressed()
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 
     private fun initViews() {
@@ -33,8 +47,41 @@ class AddContactActivity : AppCompatActivity() {
         }
 
         inputCellphone = findViewById(R.id.tv_cellphone_contact)
+        inputCellphone.setOnEditorActionListener(TextView.OnEditorActionListener { v, actionId, event ->
+            var handled = false
+            if (actionId == EditorInfo.IME_ACTION_NEXT) {
+                handled = true
+                inputEmail.requestFocus()
+            }
+            handled
+        })
+
         inputEmail = findViewById(R.id.tv_email_contact)
+        inputEmail.setOnEditorActionListener(TextView.OnEditorActionListener { v, actionId, event ->
+            var handled = false
+            if (actionId == EditorInfo.IME_ACTION_NEXT) {
+                handled = true
+                inputName.requestFocus()
+            }
+            handled
+        })
+
         inputName = findViewById(R.id.tv_name_contact)
+        inputName.setOnEditorActionListener(TextView.OnEditorActionListener { v, actionId, event ->
+            var handled = false
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                handled = true
+                saveContact()
+            }
+            handled
+        })
+    }
+
+    private fun createToolbar() {
+        val toolbar = findViewById<Toolbar>(R.id.toolbar)
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
     }
 
     private fun saveContact() {
