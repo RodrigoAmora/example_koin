@@ -1,9 +1,10 @@
-package br.com.rodrigoamora.examplekoin
+package br.com.rodrigoamora.examplekoin.ui.activity
 
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import br.com.rodrigoamora.examplekoin.R
 
 class MainActivity : AppCompatActivity() {
 
