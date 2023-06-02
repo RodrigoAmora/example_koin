@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Examplo Koin</string>
+
+    <string name="action_about">Sobre</string>
+
+    <!-- Activity Add Contact -->
+    <string name="hint_cellphone_contact">Celular do contato</string>
+    <string name="hint_email_contact">E-mail do contato</string>
+    <string name="hint_name_contact">Nome do contato</string>
+    <string name="add_contact">Adicionar contato</string>
+
+    <!-- Alert About -->
+    <string name="created_by_rodrigo_amora">Criado por Rodrigo Amora</string>
+    <string name="email_rodrigo_amora">E-mail: rodrigo.amora.freitas@gmail.com</string>
+    <string name="version_app">Versão: %s</string>
+
+    <string name="error_field_required">Campo obrigatório!</string>
+
+    <string name="success_contact_delete">Contato apagado com sucesso!</string>
+    <string name="success_contact_edit">Contato editado com sucesso!</string>
+    <string name="success_contact_save">Contato salvo com sucesso!</string>
+</resources>
