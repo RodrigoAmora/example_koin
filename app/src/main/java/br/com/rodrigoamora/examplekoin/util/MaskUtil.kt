@@ -7,18 +7,11 @@ import android.widget.EditText
 
 object MaskUtil {
 
-    const val FORMAT_PHONE = "(##)#####-####"
+    const val FORMAT_PHONE = "(##) #####-####"
 
     var old = ""
     var isUpdating = false
 
-    /**
-     * Método que deve ser chamado para realizar a formatação
-     *
-     * @param editText
-     * @param mask
-     * @return
-     */
     fun addMaskInEditText(editText: EditText, mask: String): TextWatcher {
         return object : TextWatcher {
             override fun afterTextChanged(s: Editable) {}
