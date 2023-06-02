@@ -1,11 +1,18 @@
 <resources>
     <string name="app_name">Example Koin</string>
-    <string name="action_settings">Settings</string>
 
+    <string name="action_about">About</string>
+
+    <!-- Activity Add Contact -->
     <string name="hint_cellphone_contact">Cellphone contact</string>
     <string name="hint_email_contact">E-mail contact</string>
     <string name="hint_name_contact">Name contact</string>
     <string name="add_contact">Add Contact</string>
+
+    <!-- Alert About -->
+    <string name="created_by_rodrigo_amora">Created by Rodrigo Amora</string>
+    <string name="email_rodrigo_amora">E-mail: rodrigo.amora.freitas@gmail.com</string>
+    <string name="version_app">Version: %s</string>
 
     <string name="error_field_required">This field is required!</string>
 

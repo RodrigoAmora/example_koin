@@ -5,8 +5,8 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -17,6 +17,7 @@ import br.com.rodrigoamora.examplekoin.model.Contact
 import br.com.rodrigoamora.examplekoin.ui.recyclerview.adapter.ContactAdapter
 import br.com.rodrigoamora.examplekoin.ui.recyclerview.listener.OnItemRecyclerViewClickListener
 import br.com.rodrigoamora.examplekoin.ui.viewmodel.ContactViewModel
+import br.com.rodrigoamora.examplekoin.util.PackageInfoUtil
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -30,7 +31,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         initViews()
-        createToolbar()
         configureRecyclerView()
         getContacts()
     }
@@ -42,9 +42,26 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
-            R.id.action_settings -> true
+            R.id.action_about -> {
+                showAlert()
+                true
+            }
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    private fun showAlert() {
+        val message = getString(R.string.created_by_rodrigo_amora)+"\n"+
+                        getString(R.string.email_rodrigo_amora)+"\n"+
+                        getString(R.string.version_app, PackageInfoUtil.getVersionName(this))
+
+        val builder = AlertDialog.Builder(this)
+        builder.setMessage(message)
+        builder.setPositiveButton(android.R.string.yes) { dialog, which ->
+            dialog.dismiss()
+        }
+
+        builder.show()
     }
 
     private fun initViews() {
@@ -54,11 +71,6 @@ class MainActivity : AppCompatActivity() {
         }
 
         recyclerView = findViewById(R.id.list_contacts)
-    }
-
-    private fun createToolbar() {
-        val toolbar = findViewById<Toolbar>(R.id.toolbar)
-        setSupportActionBar(toolbar)
     }
 
     private fun configureRecyclerView() {
