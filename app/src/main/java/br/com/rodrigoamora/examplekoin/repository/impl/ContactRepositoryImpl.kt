@@ -3,11 +3,13 @@ package br.com.rodrigoamora.examplekoin.repository.impl
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
-import br.com.rodrigoamora.examplekoin.asynctask.BaseAsyncTask
 import br.com.rodrigoamora.examplekoin.database.dao.ContactDao
 import br.com.rodrigoamora.examplekoin.model.Contact
 import br.com.rodrigoamora.examplekoin.repository.ContactRepository
 import br.com.rodrigoamora.examplekoin.repository.Resource
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.launch
 
 
 class ContactRepositoryImpl(
@@ -39,19 +41,15 @@ class ContactRepositoryImpl(
     }
 
     private fun deleteInDatabase(contact: Contact) {
-        BaseAsyncTask(
-            whenExecutes = {
-                contactDao.remove(contact)
-            }, whenEnds = {}
-        ).execute()
+        CoroutineScope(IO).launch {
+            contactDao.remove(contact)
+        }
     }
 
     private fun saveInDatabase(contact: Contact) {
-        BaseAsyncTask(
-            whenExecutes = {
-                contactDao.save(contact)
-            }, whenEnds = {}
-        ).execute()
+        CoroutineScope(IO).launch {
+            contactDao.save(contact)
+        }
     }
 
 }
