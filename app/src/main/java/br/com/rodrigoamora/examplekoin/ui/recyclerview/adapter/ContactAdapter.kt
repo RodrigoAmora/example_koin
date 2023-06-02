@@ -3,20 +3,17 @@ package br.com.rodrigoamora.examplekoin.ui.recyclerview.adapter
 import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import br.com.rodrigoamora.examplekoin.R
 import br.com.rodrigoamora.examplekoin.model.Contact
-import br.com.rodrigoamora.examplekoin.ui.recyclerview.listener.OnItemRecyclerViewClickListener
 import br.com.rodrigoamora.examplekoin.ui.recyclerview.viewholder.ContactViewHolder
 
-class ContactAdapter(context: Context, contacts: List<Contact>): RecyclerView.Adapter<ContactViewHolder>() {
-
-    private val context: Context = context
-    var contacts: List<Contact> = contacts
-
-    private var listener: OnItemRecyclerViewClickListener<Contact>? = null
+class ContactAdapter(private val context: Context,
+                     private val contacts: MutableList<Contact> = mutableListOf(),
+                     var deleteContact: (contact: Contact) -> Unit = {},
+                     var editContact: (contact: Contact) -> Unit = {}
+): RecyclerView.Adapter<ContactViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ContactViewHolder {
         val view = LayoutInflater.from(context)
@@ -29,21 +26,20 @@ class ContactAdapter(context: Context, contacts: List<Contact>): RecyclerView.Ad
     override fun onBindViewHolder(holder: ContactViewHolder, @SuppressLint("RecyclerView") position: Int) {
         holder.setValues(contacts[position])
 
-        holder.deleteContact.setOnClickListener ( object : View.OnClickListener {
-            override fun onClick(v: View) {
-                listener?.deleteItem(contacts[position])
-            }
-        })
+        holder.deleteContact.setOnClickListener {
+            deleteContact(contacts[position])
+        }
 
-        holder.tvNameContact.setOnClickListener ( object : View.OnClickListener {
-            override fun onClick(v: View) {
-                listener?.getItem(contacts[position])
-            }
-        })
+        holder.tvNameContact.setOnClickListener {
+            editContact(contacts[position])
+        }
     }
 
-    fun setListener(listener: OnItemRecyclerViewClickListener<Contact>?) {
-        this.listener = listener
+    fun update(contacts: List<Contact>) {
+        notifyItemRangeRemoved(0, this.contacts.size)
+        this.contacts.clear()
+        this.contacts.addAll(contacts)
+        notifyItemRangeInserted(0, this.contacts.size)
     }
 
 }
