@@ -1,6 +1,5 @@
 package br.com.rodrigoamora.examplekoin.ui.activity
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.inputmethod.EditorInfo
 import android.widget.Button
@@ -16,7 +15,6 @@ import br.com.rodrigoamora.examplekoin.model.Contact
 import br.com.rodrigoamora.examplekoin.ui.viewmodel.ContactViewModel
 import br.com.rodrigoamora.examplekoin.util.MaskUtil
 import org.koin.android.ext.android.inject
-import org.koin.core.qualifier.named
 
 class AddContactActivity : AppCompatActivity() {
 
