@@ -9,7 +9,6 @@
     <dimen name="margin_left">7dp</dimen>
     <dimen name="margin_right">7dp</dimen>
     <dimen name="margin_top">10dp</dimen>
-    <dimen name="margin_top_text_after_icon">20dp</dimen>
     <dimen name="margin_top_adapter">5dp</dimen>
     <dimen name="margin_start_and_end">10dp</dimen>
 </resources>
