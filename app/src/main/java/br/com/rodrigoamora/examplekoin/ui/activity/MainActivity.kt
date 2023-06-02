@@ -90,6 +90,8 @@ class MainActivity : AppCompatActivity() {
     private fun populateRecyclerView(contacts: List<Contact>) {
         if (contacts.isNotEmpty()) {
             val adapter = ContactAdapter(this, contacts)
+            recyclerView.adapter = adapter
+
             adapter.setListener(object : OnItemRecyclerViewClickListener<Contact> {
                 override fun deleteItem(contact: Contact) {
                     contactViewModel.delete(contact).observe(this@MainActivity,
@@ -102,13 +104,11 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 override fun getItem(contact: Contact) {
-                    val bundle = Bundle()
-                    bundle.putSerializable("contact", contact)
-
+                    val intent = Intent(this@MainActivity, AddContactActivity::class.java)
+                    intent.putExtra("contact", contact)
+                    startActivity(intent)
                 }
             })
-
-            recyclerView.adapter = adapter
         }
     }
 
