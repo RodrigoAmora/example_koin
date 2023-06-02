@@ -6,7 +6,7 @@
     android:layout_height="wrap_content">
 
     <ImageView
-        android:id="@+id/delete_salon"
+        android:id="@+id/delete_contact"
         android:src="@drawable/ic_remove"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -16,14 +16,36 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/tv_name_salon"
+        android:id="@+id/tv_name_contact"
         android:text="@string/app_name"
         android:textColor="@color/black"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_top_text_after_icon"
+        android:layout_marginTop="@dimen/margin_top"
         android:layout_marginStart="@dimen/margin_start_and_end"
-        app:layout_constraintLeft_toRightOf="@id/delete_salon"
+        app:layout_constraintLeft_toRightOf="@id/delete_contact"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_cellphone_contact"
+        android:text="@string/app_name"
+        android:textColor="@color/black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_top"
+        android:layout_marginStart="@dimen/margin_start_and_end"
+        app:layout_constraintLeft_toRightOf="@id/tv_name_contact"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_email_contact"
+        android:text="@string/app_name"
+        android:textColor="@color/black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_top_adapter"
+        android:layout_marginStart="@dimen/margin_start_and_end"
+        app:layout_constraintTop_toBottomOf="@id/tv_name_contact"
+        app:layout_constraintLeft_toRightOf="@id/delete_contact" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
