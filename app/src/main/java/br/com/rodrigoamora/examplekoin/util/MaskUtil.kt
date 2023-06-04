@@ -6,7 +6,7 @@ import android.widget.EditText
 
 
 object MaskUtil {
-
+    
     const val FORMAT_PHONE = "(##) #####-####"
 
     var old = ""
@@ -79,5 +79,4 @@ object MaskUtil {
 
         return mascara
     }
-
 }
