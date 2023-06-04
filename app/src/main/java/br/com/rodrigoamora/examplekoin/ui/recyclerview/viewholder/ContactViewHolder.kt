@@ -5,8 +5,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import br.com.rodrigoamora.examplekoin.R
+import br.com.rodrigoamora.examplekoin.formatter.FormatterCellphone
 import br.com.rodrigoamora.examplekoin.model.Contact
-import br.com.rodrigoamora.examplekoin.util.MaskUtil
 
 class ContactViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
 
@@ -17,7 +17,7 @@ class ContactViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
 
     fun setValues(contact: Contact) {
         tvCellphoneContact = itemView.findViewById<TextView>(R.id.tv_cellphone_contact)
-        tvCellphoneContact.text = MaskUtil.addMask(contact.cellphone, MaskUtil.FORMAT_PHONE)
+        tvCellphoneContact.text = FormatterCellphone.format(contact.cellphone)
 
         tvEmailContact = itemView.findViewById<TextView>(R.id.tv_email_contact)
         tvEmailContact.text = contact.email
