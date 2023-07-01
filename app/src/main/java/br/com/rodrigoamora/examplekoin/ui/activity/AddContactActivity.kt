@@ -1,6 +1,8 @@
 package br.com.rodrigoamora.examplekoin.ui.activity
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.inputmethod.EditorInfo
 import android.widget.Button
 import android.widget.EditText
@@ -8,9 +10,12 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.core.widget.addTextChangedListener
+import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.Observer
 import br.com.rodrigoamora.examplekoin.R
 import br.com.rodrigoamora.examplekoin.extension.checkText
+import br.com.rodrigoamora.examplekoin.formatter.FormatterCellphone
 import br.com.rodrigoamora.examplekoin.model.Contact
 import br.com.rodrigoamora.examplekoin.ui.viewmodel.ContactViewModel
 import br.com.rodrigoamora.examplekoin.util.MaskUtil
@@ -57,6 +62,7 @@ class AddContactActivity : AppCompatActivity() {
             saveContact()
         }
 
+        var c = ""
         inputCellphone = findViewById(R.id.tv_cellphone_contact)
         inputCellphone.addTextChangedListener(MaskUtil.addMaskInEditText(inputCellphone, MaskUtil.FORMAT_PHONE))
         inputCellphone.setOnEditorActionListener(TextView.OnEditorActionListener { v, actionId, event ->
@@ -108,7 +114,7 @@ class AddContactActivity : AppCompatActivity() {
             val email = inputEmail.text.toString()
             val name = inputName.text.toString()
 
-            val contact: Contact = Contact(contactId, name, cellphone, email)
+            val contact = Contact(contactId, name, cellphone, email)
 
             contactViewModel.saveContact(contact).observe(this,
                 Observer {
@@ -122,7 +128,7 @@ class AddContactActivity : AppCompatActivity() {
                                     message,
                                     Toast.LENGTH_LONG).show()
 
-                    finish()
+                    this.onBackPressed()
                 }
             )
         }
