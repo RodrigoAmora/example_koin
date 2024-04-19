@@ -6,6 +6,8 @@ O projeto roda a partir do Android 7.0 (API Level 24)
 
 <hr>
 
+Dependências:
+-------------
 O projeto usa as seguintes dependências:
 * Material Design
 * Constraint Layout
